@@ -20,7 +20,7 @@ pipeline
                     sh  """
                         #!/bin/bash
                         docker login -u ${DOCKER_HUB_USR} -p ${DOCKER_HUB_PSW}
-                        docker push nschultz/sonarquabe:${IMAGE_VERSION}
+                        docker push nschultz/sonarqube:${IMAGE_VERSION}
                         docker logout
                         """ 
                 } 
