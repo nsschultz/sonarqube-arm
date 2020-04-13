@@ -1,0 +1,6 @@
+.git/
+.gitignore
+Dockerfile
+Jenkinsfile
+LICENSE
+README.md
