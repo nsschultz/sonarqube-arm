@@ -1,6 +1,6 @@
 pipeline 
 {
-    agent any
+    agent { label 'builder' }
     environment
     {
         VERSION_NUMBER = '7.4'
