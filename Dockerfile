@@ -9,6 +9,8 @@ EXPOSE 9000
 WORKDIR /opt
 RUN addgroup -S sonarqube && adduser -S -G sonarqube sonarqube
 RUN set -x && \
+    apk update && \
+    apk upgrade && \
     apk add --no-cache openjdk11 && \
     apk add --no-cache bash su-exec wget && \
     apk add --no-cache --virtual .build-deps gnupg unzip libressl && \
@@ -18,7 +20,8 @@ RUN set -x && \
     chown -R sonarqube:sonarqube sonarqube && \
     apk del .build-deps && \
     rm sonarqube.zip* && \
-    rm -rf $SONARQUBE_HOME/bin/*
+    rm -rf $SONARQUBE_HOME/bin/* && \
+    rm -rf /var/cache/apk/*
 WORKDIR $SONARQUBE_HOME
 COPY run.sh $SONARQUBE_HOME/bin/
 RUN chmod +x $SONARQUBE_HOME/bin/run.sh
