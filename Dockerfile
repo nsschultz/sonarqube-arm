@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM openjdk:8-jre-alpine
 ARG SONAR_VERSION_ARG
 ENV SONAR_VERSION=$SONAR_VERSION_ARG \
     SONARQUBE_HOME=/opt/sonarqube \
@@ -9,9 +9,6 @@ EXPOSE 9000
 WORKDIR /opt
 RUN addgroup -S sonarqube && adduser -S -G sonarqube sonarqube
 RUN set -x && \
-    apk update && \
-    apk upgrade && \
-    apk add --no-cache openjdk11 && \
     apk add --no-cache bash su-exec wget && \
     apk add --no-cache --virtual .build-deps gnupg unzip libressl && \
     wget -O sonarqube.zip --no-verbose https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip && \
@@ -20,8 +17,7 @@ RUN set -x && \
     chown -R sonarqube:sonarqube sonarqube && \
     apk del .build-deps && \
     rm sonarqube.zip* && \
-    rm -rf $SONARQUBE_HOME/bin/* && \
-    rm -rf /var/cache/apk/*
+    rm -rf $SONARQUBE_HOME/bin/*
 WORKDIR $SONARQUBE_HOME
 COPY run.sh $SONARQUBE_HOME/bin/
 RUN chmod +x $SONARQUBE_HOME/bin/run.sh
