@@ -32,4 +32,5 @@ RUN set -eux && \
     rm -rf ${SONARQUBE_HOME}/bin/*
 WORKDIR $SONARQUBE_HOME
 COPY --chown=sonarqube:sonarqube run.sh ${SONARQUBE_HOME}/bin/
+RUN chmod -R 777 ${SONARQUBE_HOME}/bin/
 CMD ["/opt/sonarqube/bin/run.sh"]
