@@ -7,4 +7,4 @@ exec su-exec sonarqube \
   -Dsonar.jdbc.password="$SONARQUBE_JDBC_PASSWORD" \
   -Dsonar.jdbc.url="$SONARQUBE_JDBC_URL" \
   -Dsonar.search.javaAdditionalOpts=-Dnode.store.allow_mmapfs=false \
-  -Dsonar.web.javaAdditionalOpts="$SONARQUBE_WEB_JVM_OPTS -Djava.security.egd=file:/dev/./urandom"
+  -Dsonar.web.javaAdditionalOpts=-Djava.security.egd=file:/dev/./urandom
